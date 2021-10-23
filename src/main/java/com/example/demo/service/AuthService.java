@@ -25,7 +25,6 @@ public class AuthService {
 
 		User user = userService.getByEmail(email);
 		UserRoleType userRoleType = UserRoleType.getByName(role);
-		if ()
-		return ;
+		return true;
 	}
 }
