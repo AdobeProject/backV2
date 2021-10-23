@@ -41,7 +41,7 @@ public class CourseController {
 	}
 
 	@PostMapping("/")
-	public void create(@RequestBody CourseCreateParams course, @RequestHeader("Authorization") Long token, HttpServletResponse response) {
+	public void create(@RequestBody CourseCreateParams course, @RequestHeader("Authorization") String token, HttpServletResponse response) {
 		if (authService.isAuthorized(token, "admin"))
 			courseService.create(course);
 		else
@@ -49,7 +49,7 @@ public class CourseController {
 	}
 
 	@PostMapping("/{id}")
-	public void update(@PathVariable("id") Long id, @RequestBody CourseCreateParams update, @RequestHeader("Authorization") Long token, HttpServletResponse response) {
+	public void update(@PathVariable("id") Long id, @RequestBody CourseCreateParams update, @RequestHeader("Authorization") String token, HttpServletResponse response) {
 		if (authService.isAuthorized(token, "admin"))
 			courseService.update(id, update);
 		else
@@ -57,7 +57,7 @@ public class CourseController {
 	}
 
 	@DeleteMapping("/")
-	public void delete(@RequestParam Long id, @RequestHeader("Authorization") Long token, HttpServletResponse response) {
+	public void delete(@RequestParam Long id, @RequestHeader("Authorization") String token, HttpServletResponse response) {
 		if (authService.isAuthorized(token, "admin"))
 			courseService.delete(id);
 		else

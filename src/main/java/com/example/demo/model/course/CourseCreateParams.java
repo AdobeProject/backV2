@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class CourseCreateParams {
+	@JsonProperty("id")
+	private Long id;
+
 	@JsonProperty("name")
 	private String name;
 
@@ -24,6 +27,14 @@ public class CourseCreateParams {
 
 	@JsonProperty("quiz")
 	private String quiz;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getQuiz() {
 		return quiz;

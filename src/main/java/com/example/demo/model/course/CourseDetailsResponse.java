@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class CourseDetailsResponse {
+	@JsonProperty("id")
+	private Long id;
 
 	@JsonProperty("name")
 	private String name;
@@ -26,6 +28,27 @@ public class CourseDetailsResponse {
 	@JsonProperty("quiz")
 	private Long quiz;
 
+	public CourseDetailsResponse() {
+	}
+
+	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, Long owner, Long subCategory, Long quiz) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.img = img;
+		this.videoURL = videoURL;
+		this.owner = owner;
+		this.subCategory = subCategory;
+		this.quiz = quiz;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
