@@ -10,17 +10,22 @@ import java.util.List;
 
 @Component
 public class CourseMapper {
+
+
 	public CourseDetailsResponse map(Course course) {
-		CourseDetailsResponse response = new CourseDetailsResponse();
-		response.setId(course.getId());
-		response.setName(course.getName());
-		response.setDescription(course.getDescription());
-		response.setImg(course.getImgId());
+
+
+		CourseDetailsResponse courseResponce = new CourseDetailsResponse();
+
+		courseResponce.setId(course.getId());
+		courseResponce.setName(course.getName());
+		courseResponce.setDescription(course.getDescription());
+		courseResponce.setImg(course.getImgId());
 		if (course.getCourseOwner() != null)
-			response.setOwner(course.getCourseOwner().getId());
+			courseResponce.setOwner(course.getCourseOwner().getId());
 		if (course.getSubCategory() != null)
-			response.setSubCategory(course.getSubCategory().getId());
-		return response;
+			courseResponce.setSubCategory(course.getSubCategory().getId());
+		return courseResponce;
 	}
 
 	public CoursesDetailsResponse map(List<Course> courses) {
