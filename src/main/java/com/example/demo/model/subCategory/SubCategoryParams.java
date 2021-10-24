@@ -8,13 +8,14 @@ public class SubCategoryParams {
 
     private Category category;
 
+    public SubCategoryParams() {
+    }
+
     public SubCategoryParams(String name, Category category) {
         this.name = name;
         this.category = category;
     }
 
-    public SubCategoryParams() {
-    }
 
     public String getName() {
         return name;

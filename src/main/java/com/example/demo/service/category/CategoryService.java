@@ -8,7 +8,10 @@ import java.util.List;
 public interface CategoryService {
 
     Category create(CategoryCreateRequestModel categoryCreateRequestModel);
+
     Category getByName(String name);
-    List<Category> getAllCategories();
+
+    List<Category> getAll();
+
     Category update(CategoryCreateRequestModel categoryCreateRequestModel);
 }

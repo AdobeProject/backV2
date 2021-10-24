@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -23,6 +24,7 @@ public class Category {
     @Column(name = "IMG_ID", length = 16)
     private String imgId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<SubCategory> subCategories;
 

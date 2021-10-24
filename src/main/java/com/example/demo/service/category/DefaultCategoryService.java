@@ -43,8 +43,8 @@ public class DefaultCategoryService implements CategoryService{
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        List<Category> allCategories = categoryRepository.getAllCategories();
+    public List<Category> getAll() {
+        List<Category> allCategories = categoryRepository.findAll();
 
         if (allCategories.isEmpty()){
             throw new EntityNotFoundException(
