@@ -4,7 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.model.user.UserCreateRequestModel;
 import com.example.demo.model.user.UserDetailsResponseModel;
-import com.example.demo.service.UserService;
+import com.example.demo.service.UserService.UserService;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;

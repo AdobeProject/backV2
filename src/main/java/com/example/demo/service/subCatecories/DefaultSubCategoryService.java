@@ -71,4 +71,18 @@ public class DefaultSubCategoryService implements SubCategoryService {
 
         return subCategoryRepository.save(subCategory);
     }
+
+    @Override
+    public SubCategory getById(Long id) {
+        Optional<SubCategory> subCategory = subCategoryRepository.findById(id);
+        if(subCategory.isEmpty()){
+            throw new IllegalArgumentException("No such Subcategory");
+        }
+        return subCategory.get();
+    }
+
+//    @Override
+//    public List<SubCategory> getAllById(Long id) {
+//        return null;
+//    }
 }

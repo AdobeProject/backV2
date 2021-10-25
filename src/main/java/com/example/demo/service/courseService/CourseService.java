@@ -1,8 +1,11 @@
-package com.example.demo.service;
+package com.example.demo.service.courseService;
 
 import com.example.demo.entity.Course;
 import com.example.demo.entity.SubCategory;
+<<<<<<< Updated upstream:src/main/java/com/example/demo/service/CourseService.java
 import com.example.demo.entity.User;
+=======
+>>>>>>> Stashed changes:src/main/java/com/example/demo/service/courseService/CourseService.java
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.subCatecories.SubCategoryService;
@@ -16,6 +19,7 @@ import java.util.Optional;
 @Service
 public class CourseService {
 
+<<<<<<< Updated upstream:src/main/java/com/example/demo/service/CourseService.java
 	private final CourseRepository courseRepository;
 	private final UserService userService;
 	private final SubCategoryService subCategoryService;
@@ -26,6 +30,16 @@ public class CourseService {
 		this.userService = userService;
 		this.subCategoryService = subCategoryService;
 	}
+=======
+    private final CourseRepository courseRepository;
+    private final SubCategoryService subCategoryService;
+
+    @Autowired
+    public CourseService(CourseRepository courseRepository, SubCategoryService subCategoryService) {
+        this.courseRepository = courseRepository;
+        this.subCategoryService = subCategoryService;
+    }
+>>>>>>> Stashed changes:src/main/java/com/example/demo/service/courseService/CourseService.java
 
 	public List<Course> getAll() {
 		return courseRepository.findAll();
@@ -67,8 +81,21 @@ public class CourseService {
 		return c;
 	}
 
+<<<<<<< Updated upstream:src/main/java/com/example/demo/service/CourseService.java
 	public void delete(Long id) {
 		Course courseOptional = courseRepository.getById(id);
 		courseRepository.delete(courseOptional);
 	}
+=======
+    public void delete(Long id) {
+        Course courseOptional = courseRepository.getById(id);
+        courseRepository.delete(courseOptional);
+    }
+
+    public List<Course> getAllBySubCategory(Long id) {
+        SubCategory subCategory = subCategoryService.getById(id);
+        return courseRepository.findAllBySubCategory(subCategory);
+    }
+
+>>>>>>> Stashed changes:src/main/java/com/example/demo/service/courseService/CourseService.java
 }

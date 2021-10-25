@@ -5,18 +5,24 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.CourseService;
+import com.example.demo.service.courseService.CourseService;
+import com.example.demo.service.subCatecories.SubCategoryService;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DefaultCourseFacade implements CourseFacade {
 
     private final CourseService courseService;
     private final CourseMapper courseMapper;
+    private final SubCategoryService subCategoryService;
 
-    public DefaultCourseFacade(CourseService courseService, CourseMapper courseMapper) {
+    public DefaultCourseFacade(CourseService courseService, CourseMapper courseMapper, SubCategoryService subCategoryService) {
         this.courseService = courseService;
         this.courseMapper = courseMapper;
+        this.subCategoryService = subCategoryService;
     }
 
     @Override
@@ -40,6 +46,13 @@ public class DefaultCourseFacade implements CourseFacade {
     public CourseDetailsResponse update(Long id, CourseCreateRequestParams request) {
         Course updatedCourse = courseService.update(id, request);
         return courseMapper.map(updatedCourse);
+    }
+
+    @Override
+    public List<CourseDetailsResponse> getAllBySubCategory(Long id) {
+        final List<Course> allBySubCategory = courseService.getAllBySubCategory(id);
+        final List<CourseDetailsResponse> responseList = allBySubCategory.stream().map(course -> courseMapper.map(course)).collect(Collectors.toList());
+        return responseList;
     }
 
     @Override

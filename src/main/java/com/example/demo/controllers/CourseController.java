@@ -4,10 +4,12 @@ import com.example.demo.api.facade.course.CourseFacade;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.AuthService;
+import com.example.demo.service.AuthService.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -31,6 +33,11 @@ public class CourseController {
     @GetMapping("/{id}")
     public CourseDetailsResponse findById(@PathVariable("id") Long id) {
         return courseFacade.findById(id);
+    }
+
+    @GetMapping("/subcategory/{id}")
+    public List<CourseDetailsResponse> getAllBySubcategory(@PathVariable Long id){
+        return courseFacade.getAllBySubCategory(id);
     }
 
     @PostMapping("/")

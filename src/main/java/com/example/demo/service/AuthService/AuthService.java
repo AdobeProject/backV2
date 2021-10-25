@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.AuthService;
 
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleType;
+import com.example.demo.service.UserService.UserService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
