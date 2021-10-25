@@ -18,7 +18,7 @@ public class CourseMapper {
 		CourseDetailsResponse courseResponse = new CourseDetailsResponse(
 				course.getId(),
 				course.getName(),
-				course.getImgId(),
+				course.getDescription(),
 				course.getImgId(),
 				course.getVideoUrl(),
 				course.getCourseOwner().getEmail(),
