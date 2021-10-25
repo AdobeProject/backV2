@@ -17,13 +17,10 @@ public class DemoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-<<<<<<< Updated upstream
 
 	@Override
 	public void run(String... args) throws Exception {
 		storageService.deleteAll();
 		storageService.init();
 	}
-=======
->>>>>>> Stashed changes
 }

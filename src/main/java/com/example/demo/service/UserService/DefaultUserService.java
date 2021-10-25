@@ -11,11 +11,11 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class DefaultUserService {
 
     private final UserRepository userRepository;
 
-    public UserService(final UserRepository userRepository) {
+    public DefaultUserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

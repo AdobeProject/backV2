@@ -4,30 +4,29 @@ import com.example.demo.entity.User;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.model.user.UserCreateRequestModel;
 import com.example.demo.model.user.UserDetailsResponseModel;
-import com.example.demo.service.UserService.UserService;
+import com.example.demo.service.UserService.DefaultUserService;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Component
 public class DefaultUserApiFacade implements UserApiFacade {
 
-	private final UserService userService;
+	private final DefaultUserService defaultUserService;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
 
-	public DefaultUserApiFacade(final UserService userService,
+	public DefaultUserApiFacade(final DefaultUserService defaultUserService,
 								final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
-		this.userService = userService;
+		this.defaultUserService = defaultUserService;
 		this.userDetailsResponseModelBuilder = userDetailsResponseModelBuilder;
 	}
 
 
 	@Override
 	public UserDetailsResponseModel create(final UserCreateRequestModel requestModel) {
-		final Optional<User> u = userService.getByEmail(requestModel.getEmail());
+		final Optional<User> u = defaultUserService.getByEmail(requestModel.getEmail());
 		if (u.isPresent()) throw new RuntimeException("User already exists");
-		final User user = userService.create(
+		final User user = defaultUserService.create(
 				new UserCreateParams(
 						requestModel.getEmail(),
 						requestModel.getPassword(),

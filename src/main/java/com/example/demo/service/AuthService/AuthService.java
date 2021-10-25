@@ -2,7 +2,7 @@ package com.example.demo.service.AuthService;
 
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleType;
-import com.example.demo.service.UserService.UserService;
+import com.example.demo.service.UserService.DefaultUserService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.Optional;
 @Service
 public class AuthService {
 
-    private final UserService userService;
+    private final DefaultUserService defaultUserService;
 
-    public AuthService(UserService userService) {
-        this.userService = userService;
+    public AuthService(DefaultUserService defaultUserService) {
+        this.defaultUserService = defaultUserService;
     }
 
     public boolean isAuthorized(String token, String role) {
@@ -30,7 +30,7 @@ public class AuthService {
         String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("email").getAsString();
 
         // TODO: 25.10.21 review
-        Optional<User> userOptional = userService.getByEmail(parsedUsername);
+        Optional<User> userOptional = defaultUserService.getByEmail(parsedUsername);
         if (userOptional.isEmpty()) return false;
 
         User user = userOptional.get();

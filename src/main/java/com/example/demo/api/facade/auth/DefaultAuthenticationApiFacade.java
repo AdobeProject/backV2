@@ -4,7 +4,7 @@ import com.example.demo.api.facade.user.UserDetailsResponseModelBuilder;
 import com.example.demo.entity.User;
 import com.example.demo.model.user.UserAuthenticationRequestModel;
 import com.example.demo.model.user.UserAuthenticationResponseModel;
-import com.example.demo.service.UserService.UserService;
+import com.example.demo.service.UserService.DefaultUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.mindrot.jbcrypt.BCrypt;
@@ -16,18 +16,18 @@ import java.util.Optional;
 
 @Component
 public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
-	private final UserService userService;
+	private final DefaultUserService defaultUserService;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
 
-	public DefaultAuthenticationApiFacade(final UserService userService,
+	public DefaultAuthenticationApiFacade(final DefaultUserService defaultUserService,
 										  final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
-		this.userService = userService;
+		this.defaultUserService = defaultUserService;
 		this.userDetailsResponseModelBuilder = userDetailsResponseModelBuilder;
 	}
 
 	@Override
 	public UserAuthenticationResponseModel login(final UserAuthenticationRequestModel request) {
-		final Optional<User> userOptional = userService.getByEmail(request.getEmail());
+		final Optional<User> userOptional = defaultUserService.getByEmail(request.getEmail());
 		if (userOptional.isEmpty()) throw new EntityNotFoundException();
 		final User user = userOptional.get();
 		final boolean checkpw = BCrypt.checkpw(request.getPassword(), user.getPassword());
