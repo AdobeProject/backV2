@@ -45,6 +45,7 @@ public class CourseService {
 			else subCategory = subCategoryOptional.get();
 		}
 		System.out.println(courseParams.getOwner());
+
 		Optional<User> userOptional = defaultUserService.getByEmail(courseParams.getOwner());
 		if (userOptional.isEmpty()) throw new IllegalArgumentException("Unknown User");
 		else user = userOptional.get();

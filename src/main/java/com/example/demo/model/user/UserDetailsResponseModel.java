@@ -7,6 +7,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class UserDetailsResponseModel {
 
+    private String firstName;
+
+    private String lastName;
+
     private String email;
 
     private UserRoleType userRole;
@@ -31,11 +35,29 @@ public class UserDetailsResponseModel {
         this.userRole = userRole;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .append("email", email)
-            .append("userRoleTypeList", userRole)
-            .toString();
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .append("email", email)
+                .append("userRole", userRole)
+                .toString();
     }
 }

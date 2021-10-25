@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.api.facade.course.CourseFacade;
+import com.example.demo.entity.UserRoleType;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
@@ -14,9 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/course")
+@CrossOrigin("*")
 public class CourseController {
     private final AuthService authService;
     private final CourseFacade courseFacade;
+
 
     public CourseController(AuthService authService, CourseFacade courseFacade) {
         this.authService = authService;
@@ -43,8 +46,7 @@ public class CourseController {
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody CourseCreateRequestParams course, @RequestHeader("Authorization") String token) {
 
-
-        if (authService.isAuthorized(token, "TEACHER")) {
+        if (authService.isAuthorized(token, UserRoleType.TEACHER)) {
             return ResponseEntity.ok(courseFacade.create(course));
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Permission denied");
@@ -54,7 +56,7 @@ public class CourseController {
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CourseCreateRequestParams update, @RequestHeader("Authorization") String token) {
 
 
-        if (authService.isAuthorized(token, "admin")) {
+        if (authService.isAuthorized(token, UserRoleType.ADMIN)) {
             return ResponseEntity.ok(courseFacade.update(id, update));
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Permission denied");
@@ -63,7 +65,7 @@ public class CourseController {
     @DeleteMapping("/")
     public ResponseEntity<?> delete(@RequestParam Long id, @RequestHeader("Authorization") String token) {
 
-        if (authService.isAuthorized(token, "admin")) {
+        if (authService.isAuthorized(token, UserRoleType.ADMIN)) {
             courseFacade.delete(id);
             return ResponseEntity.ok("Course deleted successfully");
         }

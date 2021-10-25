@@ -6,4 +6,6 @@ import com.example.demo.model.user.UserDetailsResponseModel;
 public interface UserApiFacade {
 
     UserDetailsResponseModel create(UserCreateRequestModel requestModel);
+    UserDetailsResponseModel update(String token);
+
 }

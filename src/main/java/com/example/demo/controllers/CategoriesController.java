@@ -4,13 +4,11 @@ import com.example.demo.api.facade.category.CategoryFacade;
 import com.example.demo.model.category.CategoriesDetailsResponseModel;
 import com.example.demo.model.category.CategoryCreateRequestModel;
 import com.example.demo.model.category.CategoryDetailsResponseModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories")
+@CrossOrigin("*")
 public class CategoriesController {
 
     private final CategoryFacade categoryFacade;

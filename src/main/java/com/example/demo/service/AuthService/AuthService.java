@@ -19,7 +19,7 @@ public class AuthService {
         this.defaultUserService = defaultUserService;
     }
 
-    public boolean isAuthorized(String token, String role) {
+    public boolean isAuthorized(String token, UserRoleType role) {
         Base64.Decoder decoder = Base64.getDecoder();
         String[] chunks = token.split("\\.");
         String payload = new String(decoder.decode(chunks[1]));
@@ -27,19 +27,23 @@ public class AuthService {
         // TODO: 25.10.21 replace below mentioned deprecated parts
         JsonElement root = new JsonParser().parse(payload);
         String parsedRole = root.getAsJsonObject().getAsJsonObject().get("role").getAsString();
-        String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("email").getAsString();
 
-        // TODO: 25.10.21 review
-        Optional<User> userOptional = defaultUserService.getByEmail(parsedUsername);
-        if (userOptional.isEmpty()) return false;
+        if (UserRoleType.getByName(parsedRole) == role) return true;
 
-        User user = userOptional.get();
-        UserRoleType userRoleType = UserRoleType.getByName(parsedRole);
-
-        if (userRoleType != user.getRole()) return false;
-        if (user.getRole() == UserRoleType.ADMIN) return true;
-
-        return parsedRole.equals(role);
-
+        return UserRoleType.getByName(parsedRole) == UserRoleType.ADMIN;
     }
+
+    public boolean isAuthenticated(String token){
+        Base64.Decoder decoder = Base64.getDecoder();
+        String[] chunks = token.split("\\.");
+        String payload = new String(decoder.decode(chunks[1]));
+
+        // TODO: 25.10.21 replace below mentioned deprecated parts
+        JsonElement root = new JsonParser().parse(payload);
+        String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("username").getAsString();
+        Optional<User> userOptional = defaultUserService.getByEmail(parsedUsername);
+
+        return userOptional.isEmpty();
+    }
+
 }
