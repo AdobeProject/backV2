@@ -16,9 +16,6 @@ public class Course {
     @SequenceGenerator(name = "course_generator", sequenceName = "courses_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "UID", nullable = false)
-    private String uid;
-
     @Column(name = "NAME", nullable = false, length = 50)
     private String name;
 

@@ -1,0 +1,35 @@
+package com.example.demo.model.subCategory;
+
+import com.example.demo.entity.Category;
+
+public class SubCategoriesDetailsRequestModel {
+
+    private String name;
+
+    private Category category;
+
+    public SubCategoriesDetailsRequestModel() {
+    }
+
+    public SubCategoriesDetailsRequestModel(String name, Category category) {
+        this.name = name;
+        this.category = category;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+}

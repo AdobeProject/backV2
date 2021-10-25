@@ -2,7 +2,7 @@ package com.example.demo.service.subCatecories;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.SubCategory;
-import com.example.demo.model.subCategory.SubCategoryParams;
+import com.example.demo.model.subCategory.SubCategoriesDetailsRequestModel;
 import com.example.demo.repository.SubCategoryRepository;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
@@ -19,7 +19,7 @@ public class DefaultSubCategoryService implements SubCategoryService {
     }
 
     @Override
-    public SubCategory create(SubCategoryParams subCategoryParams) {
+    public SubCategory create(SubCategoriesDetailsRequestModel subCategoryParams) {
 
         SubCategory subCategory = new SubCategory();
 
@@ -55,7 +55,7 @@ public class DefaultSubCategoryService implements SubCategoryService {
     }
 
     @Override
-    public SubCategory update(SubCategoryParams subCategoryParams) {
+    public SubCategory update(SubCategoriesDetailsRequestModel subCategoryParams) {
         SubCategory subCategory = getByName(subCategoryParams.getName());
 
         if (subCategoryParams.getName() != null) {

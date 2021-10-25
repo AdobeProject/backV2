@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CategoryFacadeImpl implements CategoryFacade {
+public class DefaultCategoryFacade implements CategoryFacade {
 
     private final CategoryService categoryService;
     private final CategoryMapper categoryMapper;
 
-    public CategoryFacadeImpl(CategoryService categoryService, CategoryMapper categoryMapper) {
+    public DefaultCategoryFacade(CategoryService categoryService, CategoryMapper categoryMapper) {
         this.categoryService = categoryService;
         this.categoryMapper = categoryMapper;
     }

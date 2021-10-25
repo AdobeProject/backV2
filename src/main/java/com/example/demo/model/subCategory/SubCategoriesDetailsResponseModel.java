@@ -2,16 +2,16 @@ package com.example.demo.model.subCategory;
 
 import com.example.demo.entity.Category;
 
-public class SubCategoryParams {
+public class SubCategoriesDetailsResponseModel {
 
     private String name;
 
     private Category category;
 
-    public SubCategoryParams() {
+    public SubCategoriesDetailsResponseModel() {
     }
 
-    public SubCategoryParams(String name, Category category) {
+    public SubCategoriesDetailsResponseModel(String name, Category category) {
         this.name = name;
         this.category = category;
     }

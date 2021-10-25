@@ -15,17 +15,17 @@ public class CourseMapper {
 	public CourseDetailsResponse map(Course course) {
 
 
-		CourseDetailsResponse courseResponce = new CourseDetailsResponse();
+		CourseDetailsResponse courseResponse = new CourseDetailsResponse();
 
-		courseResponce.setId(course.getId());
-		courseResponce.setName(course.getName());
-		courseResponce.setDescription(course.getDescription());
-		courseResponce.setImg(course.getImgId());
+		courseResponse.setId(course.getId());
+		courseResponse.setName(course.getName());
+		courseResponse.setDescription(course.getDescription());
+		courseResponse.setImg(course.getImgId());
 		if (course.getCourseOwner() != null)
-			courseResponce.setOwner(course.getCourseOwner().getId());
+			courseResponse.setOwner(course.getCourseOwner().getId());
 		if (course.getSubCategory() != null)
-			courseResponce.setSubCategory(course.getSubCategory().getId());
-		return courseResponce;
+			courseResponse.setSubCategory(course.getSubCategory().getId());
+		return courseResponse;
 	}
 
 	public CoursesDetailsResponse map(List<Course> courses) {

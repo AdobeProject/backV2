@@ -3,9 +3,7 @@ package com.example.demo.model.course;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class CourseCreateParams {
-	@JsonProperty("id")
-	private Long id;
+public class CourseCreateRequestParams {
 
 	@JsonProperty("name")
 	private String name;
@@ -25,24 +23,6 @@ public class CourseCreateParams {
 	@JsonProperty("sub_category_id")
 	private String subCategory;
 
-	@JsonProperty("quiz")
-	private String quiz;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getQuiz() {
-		return quiz;
-	}
-
-	public void setQuiz(String quiz) {
-		this.quiz = quiz;
-	}
 
 	public String getSubCategory() {
 		return subCategory;

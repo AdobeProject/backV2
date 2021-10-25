@@ -22,7 +22,6 @@ public class DefaultUserApiFacade implements UserApiFacade {
 
 	@Override
 	public UserDetailsResponseModel create(final UserCreateRequestModel requestModel) {
-		System.out.println("Facade");
 		final User user = userService.create(
 				new UserCreateParams(
 						requestModel.getEmail(),
@@ -32,7 +31,6 @@ public class DefaultUserApiFacade implements UserApiFacade {
 						requestModel.getRole()
 				)
 		);
-		System.out.println("Facasde1");
 		final UserDetailsResponseModel build = userDetailsResponseModelBuilder.build(user.getId());
 		return build;
 	}
