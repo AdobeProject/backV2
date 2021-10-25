@@ -10,7 +10,9 @@ import io.jsonwebtoken.security.Keys;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityNotFoundException;
 import java.security.Key;
+import java.util.Optional;
 
 @Component
 public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
@@ -25,7 +27,9 @@ public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
 
 	@Override
 	public UserAuthenticationResponseModel login(final UserAuthenticationRequestModel request) {
-		final User user = userService.getByEmail(request.getEmail());
+		final Optional<User> userOptional = userService.getByEmail(request.getEmail());
+		if (userOptional.isEmpty()) throw new EntityNotFoundException();
+		final User user = userOptional.get();
 		final boolean checkpw = BCrypt.checkpw(request.getPassword(), user.getPassword());
 		if (!checkpw) {
 			throw new IllegalArgumentException("Username or password does not exists");
@@ -33,7 +37,7 @@ public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
 
 		Key key = Keys.hmacShaKeyFor("'7V:lT@4sfsdterU6b~O(_nt5W0lJl@`wE".getBytes());
 		String token = Jwts.builder()
-				.claim("username", user.getEmail())
+				.claim("email", user.getEmail())
 				.claim("role", user.getRole())
 				.signWith(key).compact();
 

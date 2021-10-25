@@ -23,6 +23,7 @@ public class DefaultUserDetailsResponseModelBuilder implements UserDetailsRespon
 
         final UserDetailsResponseModel userDetailsResponseModel = new UserDetailsResponseModel();
         userDetailsResponseModel.setEmail(user.getEmail());
+        userDetailsResponseModel.setUserRole(user.getRole());
 
         return userDetailsResponseModel;
     }

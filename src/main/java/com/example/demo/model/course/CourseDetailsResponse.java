@@ -1,5 +1,6 @@
 package com.example.demo.model.course;
 
+import com.example.demo.model.user.UserDetailsResponseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -19,19 +20,16 @@ public class CourseDetailsResponse {
 	@JsonProperty("video")
 	private String videoURL;
 
-	@JsonProperty("owner_id")
-	private Long owner;
+	@JsonProperty("email")
+	private String owner;
 
 	@JsonProperty("sub_category_id")
 	private Long subCategory;
 
-	@JsonProperty("quiz")
-	private Long quiz;
-
 	public CourseDetailsResponse() {
 	}
 
-	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, Long owner, Long subCategory, Long quiz) {
+	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, String owner, Long subCategory) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -39,7 +37,6 @@ public class CourseDetailsResponse {
 		this.videoURL = videoURL;
 		this.owner = owner;
 		this.subCategory = subCategory;
-		this.quiz = quiz;
 	}
 
 	public Long getId() {
@@ -82,11 +79,11 @@ public class CourseDetailsResponse {
 		this.videoURL = videoURL;
 	}
 
-	public Long getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Long owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 
@@ -98,14 +95,6 @@ public class CourseDetailsResponse {
 		this.subCategory = subCategory;
 	}
 
-	public Long getQuiz() {
-		return quiz;
-	}
-
-	public void setQuiz(Long quiz) {
-		this.quiz = quiz;
-	}
-
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -115,7 +104,6 @@ public class CourseDetailsResponse {
 				.append("videoURL", videoURL)
 				.append("owner", owner)
 				.append("subCategory", subCategory)
-				.append("quiz", quiz)
 				.toString();
 	}
 }

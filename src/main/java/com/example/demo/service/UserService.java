@@ -36,14 +36,8 @@ public class UserService {
         return savedUser;
     }
 
-    public User getByEmail(final String email) {
-        final Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isEmpty()) {
-            throw new EntityNotFoundException(
-                String.format("The user not found for the email %s", email)
-            );
-        }
-        return userOptional.get();
+    public Optional<User> getByEmail(final String email) {
+        return userRepository.findByEmail(email);
     }
 
     public User getById(final Long id) {

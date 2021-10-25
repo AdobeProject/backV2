@@ -7,6 +7,9 @@ import com.example.demo.model.user.UserDetailsResponseModel;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
+
 @Component
 public class DefaultUserApiFacade implements UserApiFacade {
 
@@ -22,6 +25,8 @@ public class DefaultUserApiFacade implements UserApiFacade {
 
 	@Override
 	public UserDetailsResponseModel create(final UserCreateRequestModel requestModel) {
+		final Optional<User> u = userService.getByEmail(requestModel.getEmail());
+		if (u.isPresent()) throw new RuntimeException("User already exists");
 		final User user = userService.create(
 				new UserCreateParams(
 						requestModel.getEmail(),

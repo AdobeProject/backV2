@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -25,15 +26,19 @@ public class AuthService {
         // TODO: 25.10.21 replace below mentioned deprecated parts
         JsonElement root = new JsonParser().parse(payload);
         String parsedRole = root.getAsJsonObject().getAsJsonObject().get("role").getAsString();
-        String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("username").getAsString();
+        String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("email").getAsString();
 
         // TODO: 25.10.21 review
-        User user = userService.getByEmail(parsedUsername);
+        Optional<User> userOptional = userService.getByEmail(parsedUsername);
+        if (userOptional.isEmpty()) return false;
+
+        User user = userOptional.get();
         UserRoleType userRoleType = UserRoleType.getByName(parsedRole);
 
-        if (parsedRole.equals(role)) {
-            return true;
-        }
-        return false;
+        if (userRoleType != user.getRole()) return false;
+        if (user.getRole() == UserRoleType.ADMIN) return true;
+
+        return parsedRole.equals(role);
+
     }
 }

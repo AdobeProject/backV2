@@ -17,18 +17,18 @@ public class CourseCreateRequestParams {
 	@JsonProperty("video")
 	private String videoURL;
 
-	@JsonProperty("owner_id")
-	private Long owner;
+	@JsonProperty("email")
+	private String owner;
 
 	@JsonProperty("sub_category_id")
-	private String subCategory;
+	private Long subCategory;
 
 
-	public String getSubCategory() {
+	public Long getSubCategory() {
 		return subCategory;
 	}
 
-	public void setSubCategory(String subCategory) {
+	public void setSubCategory(Long subCategory) {
 		this.subCategory = subCategory;
 	}
 
@@ -64,11 +64,11 @@ public class CourseCreateRequestParams {
 		this.videoURL = videoURL;
 	}
 
-	public Long getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Long owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

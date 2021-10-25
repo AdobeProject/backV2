@@ -15,16 +15,16 @@ public class CourseMapper {
 	public CourseDetailsResponse map(Course course) {
 
 
-		CourseDetailsResponse courseResponse = new CourseDetailsResponse();
+		CourseDetailsResponse courseResponse = new CourseDetailsResponse(
+				course.getId(),
+				course.getName(),
+				course.getImgId(),
+				course.getImgId(),
+				course.getVideoUrl(),
+				course.getCourseOwner().getEmail(),
+				course.getSubCategory() != null ? course.getSubCategory().getId() : null
+		);
 
-		courseResponse.setId(course.getId());
-		courseResponse.setName(course.getName());
-		courseResponse.setDescription(course.getDescription());
-		courseResponse.setImg(course.getImgId());
-		if (course.getCourseOwner() != null)
-			courseResponse.setOwner(course.getCourseOwner().getId());
-		if (course.getSubCategory() != null)
-			courseResponse.setSubCategory(course.getSubCategory().getId());
 		return courseResponse;
 	}
 

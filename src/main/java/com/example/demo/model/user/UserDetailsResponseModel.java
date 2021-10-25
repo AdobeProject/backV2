@@ -9,7 +9,7 @@ public class UserDetailsResponseModel {
 
     private String email;
 
-    private UserRoleType userRoleTypeList;
+    private UserRoleType userRole;
 
     public UserDetailsResponseModel() {
 
@@ -23,19 +23,19 @@ public class UserDetailsResponseModel {
         this.email = email;
     }
 
-    public UserRoleType getUserRoleTypeList() {
-        return userRoleTypeList;
+    public UserRoleType getUserRole() {
+        return userRole;
     }
 
-    public void setUserRole(UserRoleType userRoleTypeList) {
-        this.userRoleTypeList = userRoleTypeList;
+    public void setUserRole(UserRoleType userRole) {
+        this.userRole = userRole;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
             .append("email", email)
-            .append("userRoleTypeList", userRoleTypeList)
+            .append("userRoleTypeList", userRole)
             .toString();
     }
 }
