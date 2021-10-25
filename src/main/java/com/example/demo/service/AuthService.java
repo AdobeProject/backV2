@@ -31,7 +31,7 @@ public class AuthService {
         User user = userService.getByEmail(parsedUsername);
         UserRoleType userRoleType = UserRoleType.getByName(parsedRole);
 
-        if (parsedRole == role) {
+        if (parsedRole.equals(role)) {
             return true;
         }
         return false;

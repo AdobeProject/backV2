@@ -37,8 +37,9 @@ public class CourseController {
     public ResponseEntity<?> create(@RequestBody CourseCreateRequestParams course, @RequestHeader("Authorization") String token) {
 
 
-        if (authService.isAuthorized(token, "teacher"))
+        if (authService.isAuthorized(token, "TEACHER")) {
             return ResponseEntity.ok(courseFacade.create(course));
+        }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Permission denied");
     }
 
@@ -46,8 +47,9 @@ public class CourseController {
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CourseCreateRequestParams update, @RequestHeader("Authorization") String token) {
 
 
-        if (authService.isAuthorized(token, "admin"))
+        if (authService.isAuthorized(token, "admin")) {
             return ResponseEntity.ok(courseFacade.update(id, update));
+        }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Permission denied");
     }
 
