@@ -37,6 +37,13 @@ public class DefaultCourseFacade implements CourseFacade {
     }
 
     @Override
+    public CoursesDetailsResponse findByIds(List<Long> ids) {
+        List<Course> courses = courseService.findByIds(ids);
+        System.out.println(courseMapper.map(courses).getCourses());
+        return courseMapper.map(courses);
+    }
+
+    @Override
     public CourseDetailsResponse create(CourseCreateRequestParams request) {
         Course savedCourse = courseService.create(request);
         return courseMapper.map(savedCourse);
@@ -52,6 +59,13 @@ public class DefaultCourseFacade implements CourseFacade {
     public List<CourseDetailsResponse> getAllBySubCategory(Long id) {
         final List<Course> allBySubCategory = courseService.getAllBySubCategory(id);
         final List<CourseDetailsResponse> responseList = allBySubCategory.stream().map(course -> courseMapper.map(course)).collect(Collectors.toList());
+        return responseList;
+    }
+
+    @Override
+    public CoursesDetailsResponse getAllBySubCategories(List<Long> ids) {
+        final List<Course> allBySubCategory = courseService.getAllBySubCategories(ids);
+        final CoursesDetailsResponse responseList = courseMapper.map(allBySubCategory);
         return responseList;
     }
 

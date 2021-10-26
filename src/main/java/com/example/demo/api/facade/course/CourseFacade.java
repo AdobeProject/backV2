@@ -12,11 +12,15 @@ public interface CourseFacade {
 
     CourseDetailsResponse findById(Long id);
 
+    CoursesDetailsResponse findByIds(List<Long> ids);
+
     CourseDetailsResponse create(CourseCreateRequestParams request);
 
     CourseDetailsResponse update(Long id, CourseCreateRequestParams request);
 
     List<CourseDetailsResponse> getAllBySubCategory(Long id);
+
+    CoursesDetailsResponse getAllBySubCategories(List<Long> ids);
 
     List<CourseDetailsResponse> getAllByCategory(String name);
 

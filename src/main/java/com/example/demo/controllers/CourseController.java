@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,21 +27,21 @@ public class CourseController {
         this.courseFacade = courseFacade;
     }
 
-    //~CGLIB
-    //JDK proxy
+
     @GetMapping("/")
     public CoursesDetailsResponse getAll() {
         return courseFacade.getAll();
     }
 
-    @GetMapping("/{id}")
-    public CourseDetailsResponse findById(@PathVariable("id") Long id) {
-        return courseFacade.findById(id);
+    @GetMapping("/{ids}")
+    public CoursesDetailsResponse findById(@PathVariable ArrayList<Long> ids) {
+        return courseFacade.findByIds(ids);
     }
 
-    @GetMapping("/subcategory/{id}")
-    public List<CourseDetailsResponse> getAllBySubcategory(@PathVariable Long id){
-        return courseFacade.getAllBySubCategory(id);
+    @GetMapping("/subcategory/{ids}")
+    public CoursesDetailsResponse getAllBySubCategories(@PathVariable ArrayList<Long> ids){
+        System.out.println(ids);
+        return courseFacade.getAllBySubCategories(ids);
     }
 
     @GetMapping("/category/{name}")

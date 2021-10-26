@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,10 @@ public class CourseService {
 
 	public Course findById(Long id) {
 		return courseRepository.getById(id);
+	}
+
+	public List<Course> findByIds(List<Long> ids) {
+		return courseRepository.findAllById(ids);
 	}
 
 	public Course create(CourseCreateRequestParams courseParams) {
@@ -82,6 +87,19 @@ public class CourseService {
     public List<Course> getAllBySubCategory(Long id) {
         Optional<SubCategory> subCategory = subCategoryService.getById(id);
         return courseRepository.findAllBySubCategory(subCategory.get());
+    }
+
+    public List<Course> getAllBySubCategories(List<Long> ids) {
+		ArrayList<Course> courses = new ArrayList<>();
+
+		List<SubCategory> subCategories = subCategoryService.getByIds(ids);
+		for (SubCategory sub : subCategories){
+			for (Course course : courseRepository.findAllBySubCategory(sub)){
+
+				courses.add(course);
+			}
+		}
+        return courses;
     }
 
 	public List<Course> getAllByCategory(String name) {
