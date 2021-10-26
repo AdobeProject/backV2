@@ -18,6 +18,10 @@ public interface CourseFacade {
 
     List<CourseDetailsResponse> getAllBySubCategory(Long id);
 
+    List<CourseDetailsResponse> getAllByCategory(String name);
+
     // TODO: 25.10.21 need to clarify
     void delete(Long id);
+
+    List<CourseDetailsResponse> search(String value);
 }

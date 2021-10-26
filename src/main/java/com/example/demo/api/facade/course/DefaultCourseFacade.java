@@ -56,8 +56,22 @@ public class DefaultCourseFacade implements CourseFacade {
     }
 
     @Override
+    public List<CourseDetailsResponse> getAllByCategory(String name) {
+        final List<Course> allByCategory = courseService.getAllByCategory(name);
+        final List<CourseDetailsResponse> responseList = allByCategory.stream().map(course -> courseMapper.map(course)).collect(Collectors.toList());
+        return responseList;
+    }
+
+    @Override
     public void delete(Long id) {
         courseService.delete(id);
+    }
+
+    @Override
+    public List<CourseDetailsResponse> search(String value) {
+        final List<Course> search = courseService.search(value);
+        final List<CourseDetailsResponse> responseList = search.stream().map(course -> courseMapper.map(course)).collect(Collectors.toList());
+        return responseList;
     }
 
 

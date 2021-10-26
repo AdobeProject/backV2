@@ -4,12 +4,13 @@ import com.example.demo.entity.Category;
 import com.example.demo.model.category.CategoryCreateRequestModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
 
     Category create(CategoryCreateRequestModel categoryCreateRequestModel);
 
-    Category getByName(String name);
+    Optional<Category> getByName(String name);
 
     List<Category> getAll();
 

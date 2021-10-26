@@ -30,16 +30,9 @@ public class DefaultCategoryService implements CategoryService{
     }
 
     @Override
-    public Category getByName(String name) {
+    public Optional<Category> getByName(String name) {
         Optional<Category> categoryOptional = categoryRepository.findByName(name);
-
-        if (categoryOptional.isEmpty()){
-            throw new EntityNotFoundException(
-                    String.format("The category not found for the name %s", name)
-            );
-        }
-
-        return categoryOptional.get();
+        return categoryOptional;
     }
 
     @Override
@@ -57,7 +50,7 @@ public class DefaultCategoryService implements CategoryService{
     @Override
     public Category update(CategoryCreateRequestModel categoryCreateRequestModel) {
 
-        Category category = getByName(categoryCreateRequestModel.getName());
+        Category category = getByName(categoryCreateRequestModel.getName()).get();
 
         if (categoryCreateRequestModel.getName() != null){
             category.setName(categoryCreateRequestModel.getName());

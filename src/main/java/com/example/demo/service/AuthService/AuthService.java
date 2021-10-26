@@ -11,7 +11,7 @@ import java.util.Base64;
 import java.util.Optional;
 
 @Service
-public class AuthService {
+public class AuthService implements AuthServiceInterFace {
 
     private final DefaultUserService defaultUserService;
 

@@ -1,11 +1,13 @@
 package com.example.demo.service.courseService;
 
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.SubCategory;
 import com.example.demo.entity.User;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.UserService.DefaultUserService;
+import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.subCatecories.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,14 @@ public class CourseService {
 	private final CourseRepository courseRepository;
 	private final DefaultUserService defaultUserService;
 	private final SubCategoryService subCategoryService;
+	private final CategoryService categoryService;
 
 	@Autowired
-	public CourseService(CourseRepository courseRepository, DefaultUserService defaultUserService, SubCategoryService subCategoryService) {
+	public CourseService(CourseRepository courseRepository, DefaultUserService defaultUserService, SubCategoryService subCategoryService, CategoryService categoryService, CategoryService categoryService1) {
 		this.courseRepository = courseRepository;
 		this.defaultUserService = defaultUserService;
 		this.subCategoryService = subCategoryService;
+		this.categoryService = categoryService1;
 	}
 
 	public List<Course> getAll() {
@@ -79,5 +83,14 @@ public class CourseService {
         Optional<SubCategory> subCategory = subCategoryService.getById(id);
         return courseRepository.findAllBySubCategory(subCategory.get());
     }
+
+	public List<Course> getAllByCategory(String name) {
+		Optional<Category> category = categoryService.getByName(name);
+		return courseRepository.findAllBySubCategory_Category(category.get());
+	}
+
+    public List<Course> search(String value) {
+		return courseRepository.findAllByNameContaining(value);
+	}
 
 }

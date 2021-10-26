@@ -43,6 +43,11 @@ public class CourseController {
         return courseFacade.getAllBySubCategory(id);
     }
 
+    @GetMapping("/category/{name}")
+    public List<CourseDetailsResponse> getAllByCategory(@PathVariable String name){
+        return courseFacade.getAllByCategory(name);
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody CourseCreateRequestParams course, @RequestHeader("Authorization") String token) {
 
@@ -71,5 +76,10 @@ public class CourseController {
         }
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Permission denied");
+    }
+
+    @GetMapping("/search/{value}")
+    public List<CourseDetailsResponse> search(@PathVariable("value") String value) {
+        return courseFacade.search(value);
     }
 }
