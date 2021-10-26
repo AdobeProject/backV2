@@ -12,5 +12,6 @@ public interface SubCategoryService {
     SubCategory getByName(String name);
     List<SubCategory> getAllByCategory(Category category);
     Optional<SubCategory> getById(Long id);
+    List<SubCategory> getByIds(List<Long> ids);
     SubCategory update(SubCategoriesDetailsRequestModel subCategoryParams);
 }

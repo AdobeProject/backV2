@@ -36,6 +36,11 @@ public class DefaultSubCategoryService implements SubCategoryService {
     }
 
     @Override
+    public List<SubCategory> getByIds(List<Long> ids) {
+        return subCategoryRepository.findAllById(ids);
+    }
+
+    @Override
     public SubCategory getByName(String name) {
         Optional<SubCategory> subCategory = subCategoryRepository.findByName(name);
         if (subCategory.isEmpty()){
