@@ -4,11 +4,12 @@ import com.example.demo.entity.Course;
 import com.example.demo.model.course.CourseCreateRequestParams;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseService {
 	List<Course> getAll();
 
-	Course findById(Long id);
+	Optional<Course> findById(Long id);
 
 	List<Course> findByIds(List<Long> ids);
 

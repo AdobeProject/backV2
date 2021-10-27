@@ -1,6 +1,7 @@
 package com.example.demo.api.facade.course;
 
 import com.example.demo.entity.Course;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
@@ -11,6 +12,7 @@ import com.example.demo.service.sub.categories.SubCategoryService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -33,8 +35,9 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Override
     public CourseDetailsResponse findById(Long id) {
-        Course course = courseService.findById(id);
-        return courseMapper.map(course);
+        Optional<Course> course = courseService.findById(id);
+        if (course.isEmpty()) throw new NotFoundException("Course with Id dose not exist.");
+        return courseMapper.map(course.get());
     }
 
     @Override

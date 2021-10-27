@@ -35,14 +35,13 @@ public class DefaultAuthService implements AuthService {
     }
 
     public boolean isAuthenticated(String token){
-        return authenticate(token).isEmpty();
+        return authenticate(token).isPresent();
     }
 
     public Optional<User> authenticate(String token) {
         Jws<Claims> claimsJws = parseJwt(token);
-        String parsedUsername = claimsJws.getBody().get("username").toString();
-        System.out.println(parsedUsername);
-        return defaultUserService.getByEmail(parsedUsername);
+        String parsedEmail = claimsJws.getBody().get("email").toString();
+        return defaultUserService.getByEmail(parsedEmail);
     }
 
     private Jws<Claims> parseJwt(String jwtString) {

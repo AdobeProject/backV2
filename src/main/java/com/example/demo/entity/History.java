@@ -19,11 +19,31 @@ public class History {
     @JoinColumn(name = "COURSE_ID", foreignKey = @ForeignKey(name = "fk_history_course_id"))
     private Course course;
 
+    public History() {
+    }
+
+    public History(User user, Course course) {
+        this.user = user;
+        this.course = course;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

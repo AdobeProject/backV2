@@ -40,8 +40,8 @@ public class DefaultCourseService implements CourseService {
 		return courseRepository.findAll();
 	}
 
-	public Course findById(Long id) {
-		return courseRepository.getById(id);
+	public Optional<Course> findById(Long id) {
+		return courseRepository.findById(id);
 	}
 
 	public List<Course> findByIds(List<Long> ids) {
