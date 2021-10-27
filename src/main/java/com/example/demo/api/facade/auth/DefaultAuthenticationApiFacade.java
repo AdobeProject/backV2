@@ -8,21 +8,25 @@ import com.example.demo.service.UserService.DefaultUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
 import java.security.Key;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
 public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
 	private final DefaultUserService defaultUserService;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
+	private final Environment env;
 
 	public DefaultAuthenticationApiFacade(final DefaultUserService defaultUserService,
-										  final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
+										  final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder, Environment env) {
 		this.defaultUserService = defaultUserService;
 		this.userDetailsResponseModelBuilder = userDetailsResponseModelBuilder;
+		this.env = env;
 	}
 
 	@Override
@@ -35,7 +39,9 @@ public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
 			throw new IllegalArgumentException("Username or password does not exists");
 		}
 
-		Key key = Keys.hmacShaKeyFor("'7V:lT@4sfsdterU6b~O(_nt5W0lJl@`wE".getBytes());
+		String secret = env.getProperty("secret");
+		System.out.println(secret);
+		Key key = Keys.hmacShaKeyFor(Objects.requireNonNull(secret).getBytes());
 		String token = Jwts.builder()
 				.claim("email", user.getEmail())
 				.claim("role", user.getRole())

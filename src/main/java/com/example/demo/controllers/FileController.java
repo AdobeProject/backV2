@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class FileController {
 
 	private final FileStorageService storageService;

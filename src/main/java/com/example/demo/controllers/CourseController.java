@@ -5,7 +5,7 @@ import com.example.demo.entity.UserRoleType;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.AuthService.AuthService;
+import com.example.demo.service.AuthService.DefaultAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/course")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class CourseController {
-    private final AuthService authService;
+    private final DefaultAuthService authService;
     private final CourseFacade courseFacade;
 
 
-    public CourseController(AuthService authService, CourseFacade courseFacade) {
+    public CourseController(DefaultAuthService authService, CourseFacade courseFacade) {
         this.authService = authService;
         this.courseFacade = courseFacade;
     }

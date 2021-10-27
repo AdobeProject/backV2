@@ -4,22 +4,22 @@ import com.example.demo.api.facade.auth.DefaultAuthenticationApiFacade;
 import com.example.demo.api.facade.user.DefaultUserApiFacade;
 import com.example.demo.api.facade.user.UserApiFacade;
 import com.example.demo.model.user.*;
-import com.example.demo.service.AuthService.AuthService;
+import com.example.demo.service.AuthService.DefaultAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class UserController {
 
 	private final UserApiFacade userApiFacade;
 	private final DefaultAuthenticationApiFacade defaultAuthenticationApiFacade;
-	private final AuthService authService;
+	private final DefaultAuthService authService;
 	private final DefaultUserApiFacade defaultUserApiFacade;
 
-	public UserController(UserApiFacade userApiFacade, DefaultAuthenticationApiFacade defaultAuthenticationApiFacade, AuthService authService, DefaultUserApiFacade defaultUserApiFacade) {
+	public UserController(UserApiFacade userApiFacade, DefaultAuthenticationApiFacade defaultAuthenticationApiFacade, DefaultAuthService authService, DefaultUserApiFacade defaultUserApiFacade) {
 		this.userApiFacade = userApiFacade;
 		this.defaultAuthenticationApiFacade = defaultAuthenticationApiFacade;
 		this.authService = authService;
