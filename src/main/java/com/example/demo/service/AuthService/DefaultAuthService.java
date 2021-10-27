@@ -55,7 +55,7 @@ public class DefaultAuthService implements AuthService {
 
     private Jws<Claims> parseJwt(String jwtString) {
         String secret = env.getProperty("secret");
-        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
+        Key hmacKey = new SecretKeySpec(secret.getBytes(),
                 SignatureAlgorithm.HS256.getJcaName());
 
         Jws<Claims> jwt = Jwts.parserBuilder()
