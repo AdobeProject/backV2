@@ -4,13 +4,14 @@ import com.example.demo.entity.Category;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.SubCategory;
 import com.example.demo.entity.User;
-import com.example.demo.exception.UserNotFoundException;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.UserService.UserService;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.subCatecories.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,13 +52,13 @@ public class DefaultCourseService implements CourseService {
 		User user = null;
 		if (courseParams.getSubCategory() != null) {
 			final Optional<SubCategory> subCategoryOptional = subCategoryService.getById(courseParams.getSubCategory());
-			if (subCategoryOptional.isEmpty()) throw new IllegalArgumentException("No such subcategory");
+			if (subCategoryOptional.isEmpty()) throw new NotFoundException("No such subcategory");
 			else subCategory = subCategoryOptional.get();
 		}
 		System.out.println(courseParams.getOwner());
 
 		Optional<User> userOptional = userService.getByEmail(courseParams.getOwner());
-		if (userOptional.isEmpty()) throw new IllegalArgumentException("Unknown User");
+		if (userOptional.isEmpty()) throw new NotFoundException("Unknown User");
 		else user = userOptional.get();
 
 		System.out.println(courseParams.getVideoURL());
@@ -80,44 +81,51 @@ public class DefaultCourseService implements CourseService {
 	}
 
 
-    public void delete(Long id) {
-        Course courseOptional = courseRepository.getById(id);
-        courseRepository.delete(courseOptional);
-    }
+	public void delete(Long id) {
+		Course courseOptional = courseRepository.getById(id);
+		courseRepository.delete(courseOptional);
+	}
 
-    public List<Course> getAllBySubCategory(Long id) {
-        Optional<SubCategory> subCategory = subCategoryService.getById(id);
-        return courseRepository.findAllBySubCategory(subCategory.get());
-    }
+	public List<Course> getAllBySubCategory(Long id) {
+		Optional<SubCategory> subCategory = subCategoryService.getById(id);
+		return courseRepository.findAllBySubCategory(subCategory.get());
+	}
 
-    public List<Course> getAllBySubCategories(List<Long> ids) {
+	public List<Course> getAllBySubCategories(List<Long> ids) {
 		ArrayList<Course> courses = new ArrayList<>();
 
 		List<SubCategory> subCategories = subCategoryService.getByIds(ids);
-		for (SubCategory sub : subCategories){
-			for (Course course : courseRepository.findAllBySubCategory(sub)){
+		for (SubCategory sub : subCategories) {
+			for (Course course : courseRepository.findAllBySubCategory(sub)) {
 
 				courses.add(course);
 			}
 		}
-        return courses;
-    }
+		return courses;
+	}
 
 	public List<Course> getAllByCategory(String name) {
 		Optional<Category> category = categoryService.getByName(name);
 		return courseRepository.findAllBySubCategory_Category(category.get());
 	}
 
-    public List<Course> search(String value) {
+	public List<Course> search(String value) {
 		return courseRepository.findAllByNameContaining(value);
 	}
 
 	@Override
 	public List<Course> getAllByOwner(String email) {
 		Optional<User> userOptional = userService.getByEmail(email);
-		if (userOptional.isEmpty()) throw new UserNotFoundException("User not found with email:" + email);
+		if (userOptional.isEmpty()) throw new NotFoundException("User not found with email:" + email);
 		return courseRepository.findAllByCourseOwner(userOptional.get());
 	}
 
+	@Override
+	public List<Course> getLast10() {
+		List<Course> all = courseRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+		if (all.size() > 10)
+			all = all.subList(0, 10);
+		return all;
+	}
 
 }

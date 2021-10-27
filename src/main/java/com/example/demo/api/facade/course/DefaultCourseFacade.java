@@ -96,5 +96,10 @@ public class DefaultCourseFacade implements CourseFacade {
         return responseList;
     }
 
-
+    @Override
+    public List<CourseDetailsResponse> getLast10() {
+        final List<Course> search = courseService.getLast10();
+        final List<CourseDetailsResponse> responseList = search.stream().map(courseMapper::map).collect(Collectors.toList());
+        return responseList;
+    }
 }
