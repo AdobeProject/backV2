@@ -6,7 +6,7 @@ import com.example.demo.exception.InvalidArgumentException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.user.UserAuthenticationRequestModel;
 import com.example.demo.model.user.UserAuthenticationResponseModel;
-import com.example.demo.service.UserService.DefaultUserService;
+import com.example.demo.service.user.DefaultUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.mindrot.jbcrypt.BCrypt;

@@ -5,7 +5,7 @@ import com.example.demo.entity.History;
 import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.HistoryRepository;
-import com.example.demo.service.courseService.CourseService;
+import com.example.demo.service.course.CourseService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

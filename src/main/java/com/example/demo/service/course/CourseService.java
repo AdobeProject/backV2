@@ -1,4 +1,4 @@
-package com.example.demo.service.courseService;
+package com.example.demo.service.course;
 
 import com.example.demo.entity.Course;
 import com.example.demo.model.course.CourseCreateRequestParams;

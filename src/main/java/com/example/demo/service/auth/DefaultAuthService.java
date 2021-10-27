@@ -1,8 +1,8 @@
-package com.example.demo.service.AuthService;
+package com.example.demo.service.auth;
 
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleType;
-import com.example.demo.service.UserService.DefaultUserService;
+import com.example.demo.service.user.DefaultUserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;

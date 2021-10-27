@@ -7,12 +7,12 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.AuthService.AuthService;
-import com.example.demo.service.UserService.UserService;
-import com.example.demo.service.courseService.CourseService;
-import com.example.demo.service.courseService.DefaultCourseService;
+import com.example.demo.service.auth.AuthService;
+import com.example.demo.service.course.CourseService;
+import com.example.demo.service.course.DefaultCourseService;
 import com.example.demo.service.history.HistoryService;
-import com.example.demo.service.subCatecories.SubCategoryService;
+import com.example.demo.service.sub.categories.SubCategoryService;
+import com.example.demo.service.user.UserService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

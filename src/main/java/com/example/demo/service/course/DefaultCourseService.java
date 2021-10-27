@@ -1,4 +1,4 @@
-package com.example.demo.service.courseService;
+package com.example.demo.service.course;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Course;
@@ -7,9 +7,9 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.repository.CourseRepository;
-import com.example.demo.service.UserService.UserService;
+import com.example.demo.service.user.UserService;
 import com.example.demo.service.category.CategoryService;
-import com.example.demo.service.subCatecories.SubCategoryService;
+import com.example.demo.service.sub.categories.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

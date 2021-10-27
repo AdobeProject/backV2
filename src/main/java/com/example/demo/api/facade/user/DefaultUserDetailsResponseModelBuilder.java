@@ -4,7 +4,7 @@ package com.example.demo.api.facade.user;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.user.UserDetailsResponseModel;
-import com.example.demo.service.UserService.DefaultUserService;
+import com.example.demo.service.user.DefaultUserService;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -5,7 +5,7 @@ import com.example.demo.entity.UserRoleType;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.AuthService.DefaultAuthService;
+import com.example.demo.service.auth.DefaultAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
