@@ -3,8 +3,6 @@ package com.example.demo.service.AuthService;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleType;
 import com.example.demo.service.UserService.DefaultUserService;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -14,13 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
-import java.util.Base64;
 import java.util.Optional;
 
 
 @Service
 public class DefaultAuthService implements AuthService {
-
 
     private final Environment env;
     private final DefaultUserService defaultUserService;
@@ -47,10 +43,6 @@ public class DefaultAuthService implements AuthService {
         String parsedUsername = claimsJws.getBody().get("username").toString();
         System.out.println(parsedUsername);
         return defaultUserService.getByEmail(parsedUsername);
-    }
-
-    public void validate(String token) {
-
     }
 
     private Jws<Claims> parseJwt(String jwtString) {
