@@ -5,7 +5,9 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.InvalidArgumentException;
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.user.ChangePasswordRequestModel;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -56,9 +58,24 @@ public class DefaultUserService implements UserService{
         Optional<User> userOptional = getByEmail(email);
         if (userOptional.isEmpty()) throw new NotFoundException("User not found with email: " + email + ".");
         User user = userOptional.get();
-
-        return null;
+        user.setFirstName(update.getFirstName());
+        user.setSecondName(update.getSecondName());
+        userRepository.save(user);
+        return user;
     }
+
+    public User changePassword(User user, ChangePasswordRequestModel passwords) {
+        final boolean checkpw = BCrypt.checkpw(passwords.getOldPassword(), user.getPassword());
+        if (!checkpw) {
+            throw new InvalidArgumentException("Username or password does not exists");
+        }
+        final String salt = BCrypt.gensalt(10);
+        final String hashed = BCrypt.hashpw(passwords.getNewPassword(), salt);
+        user.setPassword(hashed);
+        userRepository.save(user);
+        return user;
+    }
+
 
     @Override
     public void delete(String email) {

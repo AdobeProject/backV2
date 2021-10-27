@@ -2,6 +2,8 @@ package com.example.demo.api.facade.auth;
 
 import com.example.demo.api.facade.user.UserDetailsResponseModelBuilder;
 import com.example.demo.entity.User;
+import com.example.demo.exception.InvalidArgumentException;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.user.UserAuthenticationRequestModel;
 import com.example.demo.model.user.UserAuthenticationResponseModel;
 import com.example.demo.service.UserService.DefaultUserService;
@@ -11,7 +13,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
 import java.security.Key;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,11 +33,11 @@ public class DefaultAuthenticationApiFacade implements AuthenticationApiFacade {
 	@Override
 	public UserAuthenticationResponseModel login(final UserAuthenticationRequestModel request) {
 		final Optional<User> userOptional = defaultUserService.getByEmail(request.getEmail());
-		if (userOptional.isEmpty()) throw new EntityNotFoundException();
+		if (userOptional.isEmpty()) throw new NotFoundException();
 		final User user = userOptional.get();
 		final boolean checkpw = BCrypt.checkpw(request.getPassword(), user.getPassword());
 		if (!checkpw) {
-			throw new IllegalArgumentException("Username or password does not exists");
+			throw new InvalidArgumentException("Username or password does not exists");
 		}
 
 		String secret = env.getProperty("secret");
