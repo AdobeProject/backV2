@@ -12,9 +12,11 @@ import java.util.List;
 public class CourseMapper {
 
 	private final UserMapper userMapper;
+	private final SubCategoryMapper subCategoryMapper;
 
-	public CourseMapper(UserMapper userMapper) {
+	public CourseMapper(UserMapper userMapper, SubCategoryMapper subCategoryMapper) {
 		this.userMapper = userMapper;
+		this.subCategoryMapper = subCategoryMapper;
 	}
 
 
@@ -28,7 +30,7 @@ public class CourseMapper {
 				course.getImgId(),
 				course.getVideoUrl(),
 				userMapper.map(course.getCourseOwner()),
-				course.getSubCategory() != null ? course.getSubCategory().getId() : null,
+				subCategoryMapper.map(course.getSubCategory()),
 				course.getCreatedAt()
 		);
 

@@ -1,5 +1,7 @@
 package com.example.demo.model.course;
 
+import com.example.demo.model.subCategory.SubCategoriesDetailsRequestModel;
+import com.example.demo.model.subCategory.SubCategoriesDetailsResponseModel;
 import com.example.demo.model.user.UserDetailsResponseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,7 +28,7 @@ public class CourseDetailsResponse {
 	private UserDetailsResponseModel owner;
 
 	@JsonProperty("sub_category_id")
-	private Long subCategory;
+	private SubCategoriesDetailsResponseModel subCategory;
 
 	@JsonProperty("created_at")
 	private LocalDateTime createdAt;
@@ -34,7 +36,7 @@ public class CourseDetailsResponse {
 	public CourseDetailsResponse() {
 	}
 
-	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, UserDetailsResponseModel owner, Long subCategory, LocalDateTime createdAt) {
+	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, UserDetailsResponseModel owner, SubCategoriesDetailsResponseModel subCategory, LocalDateTime createdAt) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -93,11 +95,11 @@ public class CourseDetailsResponse {
 		this.owner = owner;
 	}
 
-	public Long getSubCategory() {
+	public SubCategoriesDetailsResponseModel getSubCategory() {
 		return subCategory;
 	}
 
-	public void setSubCategory(Long subCategory) {
+	public void setSubCategory(SubCategoriesDetailsResponseModel subCategory) {
 		this.subCategory = subCategory;
 	}
 
