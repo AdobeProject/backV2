@@ -1,9 +1,12 @@
 package com.example.demo.api.facade.user;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.NotFoundException;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.model.user.UserCreateRequestModel;
 import com.example.demo.model.user.UserDetailsResponseModel;
+import com.example.demo.service.AuthService.AuthService;
 import com.example.demo.service.UserService.DefaultUserService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -16,11 +19,15 @@ import java.util.Optional;
 public class DefaultUserApiFacade implements UserApiFacade {
 
 	private final DefaultUserService defaultUserService;
+	private final AuthService authService;
+	private final UserMapper userMapper;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
 
 	public DefaultUserApiFacade(final DefaultUserService defaultUserService,
-								final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
+								AuthService authService, UserMapper userMapper, final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
 		this.defaultUserService = defaultUserService;
+		this.authService = authService;
+		this.userMapper = userMapper;
 		this.userDetailsResponseModelBuilder = userDetailsResponseModelBuilder;
 	}
 
@@ -56,5 +63,13 @@ public class DefaultUserApiFacade implements UserApiFacade {
 
 
 		return userDetailsResponseModelBuilder.build(userOptional.get().getId());
+	}
+
+
+	public UserDetailsResponseModel refresh(String token) {
+		Optional<User> user = authService.authenticate(token);
+		if (user.isEmpty()) throw new NotFoundException("User doesnt exist");
+		System.out.println(user.get().getFirstName());
+		return userMapper.map(user.get());
 	}
 }

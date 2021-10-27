@@ -7,5 +7,6 @@ public interface UserApiFacade {
 
     UserDetailsResponseModel create(UserCreateRequestModel requestModel);
     UserDetailsResponseModel update(String token);
+    UserDetailsResponseModel refresh(String token);
 
 }

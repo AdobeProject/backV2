@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.api.facade.auth.DefaultAuthenticationApiFacade;
-import com.example.demo.api.facade.user.DefaultUserApiFacade;
 import com.example.demo.api.facade.user.UserApiFacade;
 import com.example.demo.model.user.*;
 import com.example.demo.service.AuthService.DefaultAuthService;
@@ -16,13 +15,11 @@ public class UserController {
 	private final UserApiFacade userApiFacade;
 	private final DefaultAuthenticationApiFacade defaultAuthenticationApiFacade;
 	private final DefaultAuthService authService;
-	private final DefaultUserApiFacade defaultUserApiFacade;
 
-	public UserController(UserApiFacade userApiFacade, DefaultAuthenticationApiFacade defaultAuthenticationApiFacade, DefaultAuthService authService, DefaultUserApiFacade defaultUserApiFacade) {
+	public UserController(UserApiFacade userApiFacade, DefaultAuthenticationApiFacade defaultAuthenticationApiFacade, DefaultAuthService authService) {
 		this.userApiFacade = userApiFacade;
 		this.defaultAuthenticationApiFacade = defaultAuthenticationApiFacade;
 		this.authService = authService;
-		this.defaultUserApiFacade = defaultUserApiFacade;
 	}
 
 	@PostMapping("/signup")
@@ -37,8 +34,9 @@ public class UserController {
 
 	@GetMapping("/")
 	public ResponseEntity<?> refresh(@RequestHeader("Authorization") String token) {
+		UserDetailsResponseModel user = userApiFacade.refresh(token);
 		if (authService.isAuthenticated(token)) {
-			return ResponseEntity.ok(defaultUserApiFacade.update(token));
+			return ResponseEntity.ok(user);
 		}
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not exist");
 	}
