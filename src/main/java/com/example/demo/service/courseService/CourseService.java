@@ -29,4 +29,6 @@ public interface CourseService {
 	List<Course> getAllByOwner(String email);
 
 	List<Course> getLast10();
+
+	List<Course> getSuggestedCourses(Long id);
 }

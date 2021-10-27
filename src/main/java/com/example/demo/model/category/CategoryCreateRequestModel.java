@@ -5,14 +5,14 @@ public class CategoryCreateRequestModel {
 
     private String name;
 
-    private String imgId;
+    private String imgURL;
 
     public CategoryCreateRequestModel() {
     }
 
     public CategoryCreateRequestModel(String name, String imgId) {
         this.name = name;
-        this.imgId = imgId;
+        this.imgURL = imgId;
     }
 
     public String getName() {
@@ -24,10 +24,10 @@ public class CategoryCreateRequestModel {
     }
 
     public String getImgId() {
-        return imgId;
+        return imgURL;
     }
 
     public void setImgId(String imgId) {
-        this.imgId = imgId;
+        this.imgURL = imgId;
     }
 }

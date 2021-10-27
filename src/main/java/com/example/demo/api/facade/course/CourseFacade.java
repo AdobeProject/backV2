@@ -32,4 +32,5 @@ public interface CourseFacade {
     List<CourseDetailsResponse> getAllByOwner(String email);
 
     List<CourseDetailsResponse> getLast10();
+    List<CourseDetailsResponse> getSuggestedCourses(Long id);
 }
