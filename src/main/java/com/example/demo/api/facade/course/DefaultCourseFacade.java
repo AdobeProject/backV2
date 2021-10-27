@@ -1,13 +1,17 @@
 package com.example.demo.api.facade.course;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
+import com.example.demo.service.AuthService.AuthService;
+import com.example.demo.service.UserService.UserService;
 import com.example.demo.service.courseService.CourseService;
 import com.example.demo.service.courseService.DefaultCourseService;
+import com.example.demo.service.history.HistoryService;
 import com.example.demo.service.subCatecories.SubCategoryService;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +24,18 @@ public class DefaultCourseFacade implements CourseFacade {
 
     private final CourseService courseService;
     private final CourseMapper courseMapper;
+    private final UserService userService;
     private final SubCategoryService subCategoryService;
+    private final HistoryService historyService;
+    private final AuthService authService;
 
-    public DefaultCourseFacade(DefaultCourseService courseService, CourseMapper courseMapper, SubCategoryService subCategoryService) {
+    public DefaultCourseFacade(DefaultCourseService courseService, CourseMapper courseMapper, UserService userService, SubCategoryService subCategoryService, HistoryService historyService, AuthService authService) {
         this.courseService = courseService;
         this.courseMapper = courseMapper;
+        this.userService = userService;
         this.subCategoryService = subCategoryService;
+        this.historyService = historyService;
+        this.authService = authService;
     }
 
     @Override
@@ -111,5 +121,12 @@ public class DefaultCourseFacade implements CourseFacade {
         final List<Course> courses = courseService.getSuggestedCourses(id);
         final List<CourseDetailsResponse> responseList = courses.stream().map(courseMapper::map).collect(Collectors.toList());
         return responseList;
+    }
+
+    @Override
+    public CoursesDetailsResponse getAllUserEnrolledCourses(String token, Long courseId) {
+        Optional<User> user = authService.authenticate(token);
+        if (user.isEmpty()) throw new NotFoundException("User Dose not Exist");
+        return courseMapper.mapHistories(user.get().getEnrolledCourses());
     }
 }

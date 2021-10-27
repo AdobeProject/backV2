@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -37,7 +38,8 @@ public class User {
 	@Column(name = "CREATED_AT", nullable = false)
 	private LocalDateTime createdAt;
 
-	@OneToMany(mappedBy = "user")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<History> enrolledCourses;
 
 	public User() {

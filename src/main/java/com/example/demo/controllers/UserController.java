@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.api.facade.auth.DefaultAuthenticationApiFacade;
 import com.example.demo.api.facade.user.UserApiFacade;
+import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.user.*;
 import com.example.demo.service.AuthService.DefaultAuthService;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,10 @@ public class UserController {
 			return ResponseEntity.ok(user);
 		}
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not exist");
+	}
+
+	@PostMapping("/add/{id}")
+	public CourseDetailsResponse add(@RequestHeader("Authorization") String token, @PathVariable("id") Long courseId) {
+		return userApiFacade.add(token, courseId);
 	}
 }

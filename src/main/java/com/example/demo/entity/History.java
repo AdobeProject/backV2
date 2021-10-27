@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,10 +13,12 @@ public class History {
     @SequenceGenerator(name = "categories_generator", sequenceName = "categories_id_seq", allocationSize = 1)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "fk_history_user_id"))
     private User user;
 
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name = "COURSE_ID", foreignKey = @ForeignKey(name = "fk_history_course_id"))
     private Course course;
