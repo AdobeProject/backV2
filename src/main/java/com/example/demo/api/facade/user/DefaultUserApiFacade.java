@@ -1,11 +1,10 @@
 package com.example.demo.api.facade.user;
 
+import com.example.demo.api.facade.auth.AuthenticationApiFacade;
 import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapper.UserMapper;
-import com.example.demo.model.user.UserCreateParams;
-import com.example.demo.model.user.UserCreateRequestModel;
-import com.example.demo.model.user.UserDetailsResponseModel;
+import com.example.demo.model.user.*;
 import com.example.demo.service.AuthService.AuthService;
 import com.example.demo.service.UserService.DefaultUserService;
 import com.google.gson.JsonElement;
@@ -22,18 +21,20 @@ public class DefaultUserApiFacade implements UserApiFacade {
 	private final AuthService authService;
 	private final UserMapper userMapper;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
+	private final AuthenticationApiFacade auth;
 
 	public DefaultUserApiFacade(final DefaultUserService defaultUserService,
-								AuthService authService, UserMapper userMapper, final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder) {
+								AuthService authService, UserMapper userMapper, final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder, AuthenticationApiFacade auth) {
 		this.defaultUserService = defaultUserService;
 		this.authService = authService;
 		this.userMapper = userMapper;
 		this.userDetailsResponseModelBuilder = userDetailsResponseModelBuilder;
+		this.auth = auth;
 	}
 
 
 	@Override
-	public UserDetailsResponseModel create(final UserCreateRequestModel requestModel) {
+	public UserAuthenticationResponseModel create(final UserCreateRequestModel requestModel) {
 		final Optional<User> u = defaultUserService.getByEmail(requestModel.getEmail());
 		if (u.isPresent()) throw new RuntimeException("User already exists");
 		final User user = defaultUserService.create(
@@ -45,8 +46,9 @@ public class DefaultUserApiFacade implements UserApiFacade {
 						requestModel.getRole()
 				)
 		);
-		final UserDetailsResponseModel build = userDetailsResponseModelBuilder.build(user.getId());
-		return build;
+
+		return auth.login(new UserAuthenticationRequestModel(requestModel.getEmail(),requestModel.getPassword()));
+
 	}
 
 	@Override

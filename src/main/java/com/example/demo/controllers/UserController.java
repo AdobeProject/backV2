@@ -23,7 +23,7 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public UserDetailsResponseModel signUp(@RequestBody UserCreateRequestModel userCreateParams) {
+	public UserAuthenticationResponseModel signUp(@RequestBody UserCreateRequestModel userCreateParams) {
 		return userApiFacade.create(userCreateParams);
 	}
 
