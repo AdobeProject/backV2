@@ -91,15 +91,22 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Override
     public List<CourseDetailsResponse> getAllByOwner(String email) {
-        final List<Course> search = courseService.getAllByOwner(email);
-        final List<CourseDetailsResponse> responseList = search.stream().map(courseMapper::map).collect(Collectors.toList());
+        final List<Course> courses = courseService.getAllByOwner(email);
+        final List<CourseDetailsResponse> responseList = courses.stream().map(courseMapper::map).collect(Collectors.toList());
         return responseList;
     }
 
     @Override
     public List<CourseDetailsResponse> getLast10() {
-        final List<Course> search = courseService.getLast10();
-        final List<CourseDetailsResponse> responseList = search.stream().map(courseMapper::map).collect(Collectors.toList());
+        final List<Course> courses = courseService.getLast10();
+        final List<CourseDetailsResponse> responseList = courses.stream().map(courseMapper::map).collect(Collectors.toList());
+        return responseList;
+    }
+
+    @Override
+    public List<CourseDetailsResponse> getSuggestedCourses(Long id) {
+        final List<Course> courses = courseService.getSuggestedCourses(id);
+        final List<CourseDetailsResponse> responseList = courses.stream().map(courseMapper::map).collect(Collectors.toList());
         return responseList;
     }
 }

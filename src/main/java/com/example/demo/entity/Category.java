@@ -21,7 +21,7 @@ public class Category {
     @Column(name = "NAME", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "IMG_ID", length = 16)
+    @Column(name = "IMG_ID")
     private String imgId;
 
     @JsonManagedReference

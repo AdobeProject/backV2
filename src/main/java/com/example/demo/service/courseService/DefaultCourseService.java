@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class DefaultCourseService implements CourseService {
@@ -126,6 +127,20 @@ public class DefaultCourseService implements CourseService {
 		if (all.size() > 10)
 			all = all.subList(0, 10);
 		return all;
+	}
+
+	@Override
+	public List<Course> getSuggestedCourses(Long id) {
+		Course c = courseRepository.getById(id);
+		List<Course> allCourses = getAllByCategory(c.getSubCategory().getCategory().getName());
+		Random rn = new Random();
+		if (allCourses.size()<= 5) return allCourses;
+		List<Course> suggested = new ArrayList<>(5);
+		for (int i = 0; i < 5; i++) {
+			int number = rn.nextInt(allCourses.size());
+			suggested.add(allCourses.remove(number));
+		}
+		return suggested;
 	}
 
 }

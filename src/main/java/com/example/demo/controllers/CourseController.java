@@ -93,4 +93,11 @@ public class CourseController {
     public List<CourseDetailsResponse> getLast10() {
         return courseFacade.getLast10();
     }
+
+    @GetMapping("/suggested/{id}")
+    public List<CourseDetailsResponse> getSuggestedCourses(@PathVariable("id") Long id) {
+        return courseFacade.getSuggestedCourses(id);
+    }
 }
+
+
