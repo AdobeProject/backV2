@@ -88,4 +88,9 @@ public class CourseController {
     public List<CourseDetailsResponse> getAllByOwner(@PathVariable("email") String email) {
         return courseFacade.getAllByOwner(email);
     }
+
+    @GetMapping("/last10")
+    public List<CourseDetailsResponse> getLast10() {
+        return courseFacade.getLast10();
+    }
 }

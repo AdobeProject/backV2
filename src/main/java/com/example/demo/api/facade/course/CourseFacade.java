@@ -30,4 +30,6 @@ public interface CourseFacade {
     List<CourseDetailsResponse> search(String value);
 
     List<CourseDetailsResponse> getAllByOwner(String email);
+
+    List<CourseDetailsResponse> getLast10();
 }
