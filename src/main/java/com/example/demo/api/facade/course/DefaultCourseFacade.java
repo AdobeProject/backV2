@@ -6,6 +6,7 @@ import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
 import com.example.demo.service.courseService.CourseService;
+import com.example.demo.service.courseService.DefaultCourseService;
 import com.example.demo.service.subCatecories.SubCategoryService;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class DefaultCourseFacade implements CourseFacade {
     private final CourseMapper courseMapper;
     private final SubCategoryService subCategoryService;
 
-    public DefaultCourseFacade(CourseService courseService, CourseMapper courseMapper, SubCategoryService subCategoryService) {
+    public DefaultCourseFacade(DefaultCourseService courseService, CourseMapper courseMapper, SubCategoryService subCategoryService) {
         this.courseService = courseService;
         this.courseMapper = courseMapper;
         this.subCategoryService = subCategoryService;
@@ -85,6 +86,13 @@ public class DefaultCourseFacade implements CourseFacade {
     public List<CourseDetailsResponse> search(String value) {
         final List<Course> search = courseService.search(value);
         final List<CourseDetailsResponse> responseList = search.stream().map(course -> courseMapper.map(course)).collect(Collectors.toList());
+        return responseList;
+    }
+
+    @Override
+    public List<CourseDetailsResponse> getAllByOwner(String email) {
+        final List<Course> search = courseService.getAllByOwner(email);
+        final List<CourseDetailsResponse> responseList = search.stream().map(courseMapper::map).collect(Collectors.toList());
         return responseList;
     }
 

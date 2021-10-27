@@ -83,4 +83,9 @@ public class CourseController {
     public List<CourseDetailsResponse> search(@PathVariable("value") String value) {
         return courseFacade.search(value);
     }
+
+    @GetMapping("/teacher/{email}")
+    public List<CourseDetailsResponse> getAllByOwner(@PathVariable("email") String email) {
+        return courseFacade.getAllByOwner(email);
+    }
 }
