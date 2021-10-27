@@ -28,4 +28,6 @@ public interface CourseFacade {
     void delete(Long id);
 
     List<CourseDetailsResponse> search(String value);
+
+    List<CourseDetailsResponse> getAllByOwner(String email);
 }
