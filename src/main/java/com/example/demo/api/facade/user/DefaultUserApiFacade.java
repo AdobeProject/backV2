@@ -4,7 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.model.user.UserCreateRequestModel;
 import com.example.demo.model.user.UserDetailsResponseModel;
-import com.example.demo.service.UserService.DefaultUserService;
+import com.example.demo.service.user.DefaultUserService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Component;

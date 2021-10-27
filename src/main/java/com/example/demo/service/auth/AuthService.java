@@ -1,4 +1,4 @@
-package com.example.demo.service.AuthService;
+package com.example.demo.service.auth;
 
 import com.example.demo.entity.UserRoleType;
 

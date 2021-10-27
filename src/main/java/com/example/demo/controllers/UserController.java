@@ -4,7 +4,7 @@ import com.example.demo.api.facade.auth.DefaultAuthenticationApiFacade;
 import com.example.demo.api.facade.user.DefaultUserApiFacade;
 import com.example.demo.api.facade.user.UserApiFacade;
 import com.example.demo.model.user.*;
-import com.example.demo.service.AuthService.DefaultAuthService;
+import com.example.demo.service.auth.DefaultAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

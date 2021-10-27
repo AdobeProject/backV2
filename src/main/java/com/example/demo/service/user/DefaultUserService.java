@@ -1,13 +1,13 @@
-package com.example.demo.service.UserService;
+package com.example.demo.service.user;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import javax.persistence.EntityNotFoundException;
 
 import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utility.Regex;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,13 @@ public class DefaultUserService implements UserService{
         final String salt = BCrypt.gensalt(10);
 
         final User user = new User();
+        Regex.validEmail(createParams.getEmail());
         user.setEmail(createParams.getEmail());
+        Regex.validFirstName(createParams.getFirstName());
         user.setFirstName(createParams.getFirstName());
+        Regex.validSecondName(createParams.getSecondName());
         user.setSecondName(createParams.getSecondName());
+        Regex.validPassword(createParams.getPassword());
         user.setPassword(
             BCrypt.hashpw(createParams.getPassword(), salt)
         );

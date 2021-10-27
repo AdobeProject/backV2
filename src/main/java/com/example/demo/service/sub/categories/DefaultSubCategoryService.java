@@ -1,4 +1,4 @@
-package com.example.demo.service.subCatecories;
+package com.example.demo.service.sub.categories;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.SubCategory;

@@ -30,6 +30,7 @@ public class UserCreateParams {
         if (password == null) {
             throw new IllegalArgumentException("The password should not be null");
         }
+
         this.email = email;
         this.password = password;
         this.firstName = firstName;

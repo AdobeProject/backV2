@@ -5,9 +5,9 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.course.CourseCreateRequestParams;
 import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.course.CoursesDetailsResponse;
-import com.example.demo.service.courseService.CourseService;
-import com.example.demo.service.courseService.DefaultCourseService;
-import com.example.demo.service.subCatecories.SubCategoryService;
+import com.example.demo.service.course.CourseService;
+import com.example.demo.service.course.DefaultCourseService;
+import com.example.demo.service.sub.categories.SubCategoryService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

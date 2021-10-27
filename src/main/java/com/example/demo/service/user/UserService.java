@@ -1,4 +1,4 @@
-package com.example.demo.service.UserService;
+package com.example.demo.service.user;
 
 import com.example.demo.entity.User;
 import com.example.demo.model.user.UserCreateParams;
