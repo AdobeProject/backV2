@@ -9,3 +9,4 @@ spring:
 server:
   error:
     include-message: always
+secret: '\7V:lT@4sfsdterU6b~O(_nt5W0lJl@`wE'

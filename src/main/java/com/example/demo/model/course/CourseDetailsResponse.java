@@ -4,6 +4,8 @@ import com.example.demo.model.user.UserDetailsResponseModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.time.LocalDateTime;
+
 public class CourseDetailsResponse {
 	@JsonProperty("id")
 	private Long id;
@@ -20,16 +22,19 @@ public class CourseDetailsResponse {
 	@JsonProperty("video")
 	private String videoURL;
 
-	@JsonProperty("email")
-	private String owner;
+	@JsonProperty("owner")
+	private UserDetailsResponseModel owner;
 
 	@JsonProperty("sub_category_id")
 	private Long subCategory;
 
+	@JsonProperty("created_at")
+	private LocalDateTime createdAt;
+
 	public CourseDetailsResponse() {
 	}
 
-	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, String owner, Long subCategory) {
+	public CourseDetailsResponse(Long id, String name, String description, String img, String videoURL, UserDetailsResponseModel owner, Long subCategory, LocalDateTime createdAt) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -37,6 +42,7 @@ public class CourseDetailsResponse {
 		this.videoURL = videoURL;
 		this.owner = owner;
 		this.subCategory = subCategory;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -79,11 +85,11 @@ public class CourseDetailsResponse {
 		this.videoURL = videoURL;
 	}
 
-	public String getOwner() {
+	public UserDetailsResponseModel getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
+	public void setOwner(UserDetailsResponseModel owner) {
 		this.owner = owner;
 	}
 
@@ -93,6 +99,14 @@ public class CourseDetailsResponse {
 
 	public void setSubCategory(Long subCategory) {
 		this.subCategory = subCategory;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@Override

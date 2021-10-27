@@ -77,6 +77,13 @@ public class DefaultCourseService implements CourseService {
 
 	public Course update(Long id, CourseCreateRequestParams update) {
 		Course c = courseRepository.getById(id);
+		c.setName(update.getName());
+		c.setDescription(update.getDescription());
+		c.setImgId(update.getImg());
+		c.setVideoUrl(update.getVideoURL());
+		Optional<SubCategory> sub = subCategoryService.getById(update.getSubCategory());
+		if (sub.isEmpty()) throw new NotFoundException("The subcategory with id: " + update.getSubCategory() + " doesn't exist.");
+		c.setSubCategory(sub.get());
 		courseRepository.save(c);
 		return c;
 	}

@@ -11,6 +11,12 @@ import java.util.List;
 @Component
 public class CourseMapper {
 
+	private final UserMapper userMapper;
+
+	public CourseMapper(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
+
 
 	public CourseDetailsResponse map(Course course) {
 
@@ -21,8 +27,9 @@ public class CourseMapper {
 				course.getDescription(),
 				course.getImgId(),
 				course.getVideoUrl(),
-				course.getCourseOwner().getEmail(),
-				course.getSubCategory() != null ? course.getSubCategory().getId() : null
+				userMapper.map(course.getCourseOwner()),
+				course.getSubCategory() != null ? course.getSubCategory().getId() : null,
+				course.getCreatedAt()
 		);
 
 		return courseResponse;

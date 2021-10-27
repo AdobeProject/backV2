@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class CategoriesController {
 
     private final CategoryFacade categoryFacade;
