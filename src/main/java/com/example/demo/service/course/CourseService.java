@@ -31,5 +31,5 @@ public interface CourseService {
 
 	List<Course> getLast10();
 
-	List<Course> getSuggestedCourses(Long id);
+	List<Course> getSuggestedCourses(String name);
 }

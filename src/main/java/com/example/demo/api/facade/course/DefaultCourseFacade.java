@@ -117,14 +117,14 @@ public class DefaultCourseFacade implements CourseFacade {
     }
 
     @Override
-    public List<CourseDetailsResponse> getSuggestedCourses(Long id) {
-        final List<Course> courses = courseService.getSuggestedCourses(id);
+    public List<CourseDetailsResponse> getSuggestedCourses(String name) {
+        final List<Course> courses = courseService.getSuggestedCourses(name);
         final List<CourseDetailsResponse> responseList = courses.stream().map(courseMapper::map).collect(Collectors.toList());
         return responseList;
     }
 
     @Override
-    public CoursesDetailsResponse getAllUserEnrolledCourses(String token, Long courseId) {
+    public CoursesDetailsResponse getAllUserEnrolledCourses(String token) {
         Optional<User> user = authService.authenticate(token);
         if (user.isEmpty()) throw new NotFoundException("User Dose not Exist");
         return courseMapper.mapHistories(user.get().getEnrolledCourses());

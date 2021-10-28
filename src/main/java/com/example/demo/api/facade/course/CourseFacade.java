@@ -33,7 +33,7 @@ public interface CourseFacade {
 
     List<CourseDetailsResponse> getLast10();
 
-    List<CourseDetailsResponse> getSuggestedCourses(Long id);
+    List<CourseDetailsResponse> getSuggestedCourses(String name);
 
-    CoursesDetailsResponse getAllUserEnrolledCourses(String token, Long courseId);
+    CoursesDetailsResponse getAllUserEnrolledCourses(String token);
 }

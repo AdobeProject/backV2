@@ -40,7 +40,6 @@ public class CourseController {
 
     @GetMapping("/subcategory/{ids}")
     public CoursesDetailsResponse getAllBySubCategories(@PathVariable ArrayList<Long> ids){
-        System.out.println(ids);
         return courseFacade.getAllBySubCategories(ids);
     }
 
@@ -94,9 +93,9 @@ public class CourseController {
         return courseFacade.getLast10();
     }
 
-    @GetMapping("/suggested/{id}")
-    public List<CourseDetailsResponse> getSuggestedCourses(@PathVariable("id") Long id) {
-        return courseFacade.getSuggestedCourses(id);
+    @GetMapping("/suggested/{name}")
+    public List<CourseDetailsResponse> getSuggestedCourses(@PathVariable("name") String name) {
+        return courseFacade.getSuggestedCourses(name);
     }
 }
 

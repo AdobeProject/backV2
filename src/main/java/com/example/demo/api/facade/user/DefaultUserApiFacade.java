@@ -10,8 +10,10 @@ import com.example.demo.model.user.*;
 import com.example.demo.service.auth.AuthService;
 import com.example.demo.service.history.HistoryService;
 import com.example.demo.service.user.DefaultUserService;
+import com.example.demo.service.user.UserService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -20,7 +22,7 @@ import java.util.Optional;
 @Component
 public class DefaultUserApiFacade implements UserApiFacade {
 
-	private final DefaultUserService defaultUserService;
+	private final UserService defaultUserService;
 	private final AuthService authService;
 	private final UserMapper userMapper;
 	private final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder;
@@ -28,7 +30,7 @@ public class DefaultUserApiFacade implements UserApiFacade {
 	private final HistoryService historyService;
 	private final CourseMapper courseMapper;
 
-	public DefaultUserApiFacade(final DefaultUserService defaultUserService,
+	public DefaultUserApiFacade(final UserService defaultUserService,
 								AuthService authService, UserMapper userMapper, final UserDetailsResponseModelBuilder userDetailsResponseModelBuilder, AuthenticationApiFacade auth, HistoryService historyService, CourseMapper courseMapper) {
 		this.defaultUserService = defaultUserService;
 		this.authService = authService;
@@ -72,6 +74,14 @@ public class DefaultUserApiFacade implements UserApiFacade {
 
 
 		return userDetailsResponseModelBuilder.build(userOptional.get().getId());
+	}
+
+	@Override
+	public void delete(String token) {
+		Optional<User> user = authService.authenticate(token);
+		if (user.isEmpty()) throw new NotFoundException("User doesnt exist");
+		defaultUserService.delete(user.get().getEmail());
+
 	}
 
 

@@ -137,9 +137,9 @@ public class DefaultCourseService implements CourseService {
 	}
 
 	@Override
-	public List<Course> getSuggestedCourses(Long id) {
-		Course c = courseRepository.getById(id);
-		List<Course> allCourses = getAllByCategory(c.getSubCategory().getCategory().getName());
+	public List<Course> getSuggestedCourses(String name) {
+		Optional<Category> category = categoryService.getByName(name);
+		List<Course> allCourses = courseRepository.findAllBySubCategory_Category(category.get());
 		Random rn = new Random();
 		if (allCourses.size()<= 5) return allCourses;
 		List<Course> suggested = new ArrayList<>(5);

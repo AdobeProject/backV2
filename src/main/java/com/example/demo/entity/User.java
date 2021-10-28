@@ -28,7 +28,7 @@ public class User {
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	@Column(name = "IMG_ID", length = 16)
+	@Column(name = "IMG_ID")
 	private String imgId;
 
 	@Enumerated(value = EnumType.STRING)
