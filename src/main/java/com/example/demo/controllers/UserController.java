@@ -37,10 +37,6 @@ public class UserController {
 		return defaultAuthenticationApiFacade.login(requestModel);
 	}
 
-	@PostMapping("/delete")
-	public void delete(@RequestHeader("Authorization") String token) {
-		userApiFacade.delete(token);
-	}
 
 	@GetMapping("/")
 	public ResponseEntity<?> refresh(@RequestHeader("Authorization") String token) {
@@ -59,5 +55,15 @@ public class UserController {
 	@GetMapping("/myCourses")
 	public CoursesDetailsResponse getMyCourses(@RequestHeader("Authorization") String token) {
 		return courseFacade.getAllUserEnrolledCourses(token);
+	}
+
+	@PutMapping("/")
+	public UserDetailsResponseModel update(@RequestHeader("Authorization") String token, @RequestBody UserCreateParams update) {
+		return userApiFacade.update(token, update);
+	}
+
+	@PutMapping("/password")
+	public UserDetailsResponseModel changePassword(@RequestHeader("Authorization") String token, @RequestBody ChangePasswordRequestModel passwords) {
+		return userApiFacade.changePassword(token, passwords);
 	}
 }

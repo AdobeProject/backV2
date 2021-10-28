@@ -9,14 +9,9 @@ import com.example.demo.model.course.CourseDetailsResponse;
 import com.example.demo.model.user.*;
 import com.example.demo.service.auth.AuthService;
 import com.example.demo.service.history.HistoryService;
-import com.example.demo.service.user.DefaultUserService;
 import com.example.demo.service.user.UserService;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
 import java.util.Optional;
 
 @Component
@@ -61,27 +56,11 @@ public class DefaultUserApiFacade implements UserApiFacade {
 	}
 
 	@Override
-	public UserDetailsResponseModel update(String token) {
-
-		Base64.Decoder decoder = Base64.getDecoder();
-		String[] chunks = token.split("\\.");
-		String payload = new String(decoder.decode(chunks[1]));
-
-		// TODO: 25.10.21 replace below mentioned deprecated parts
-		JsonElement root = new JsonParser().parse(payload);
-		String parsedUsername = root.getAsJsonObject().getAsJsonObject().get("username").getAsString();
-		Optional<User> userOptional = defaultUserService.getByEmail(parsedUsername);
-
-
-		return userDetailsResponseModelBuilder.build(userOptional.get().getId());
-	}
-
-	@Override
-	public void delete(String token) {
+	public UserDetailsResponseModel update(String token, UserCreateParams newParams) {
 		Optional<User> user = authService.authenticate(token);
 		if (user.isEmpty()) throw new NotFoundException("User doesnt exist");
-		defaultUserService.delete(user.get().getEmail());
-
+		User updated = defaultUserService.update(user.get(), newParams);
+		return userMapper.map(updated);
 	}
 
 
@@ -98,4 +77,14 @@ public class DefaultUserApiFacade implements UserApiFacade {
 		if (optionalUser.isEmpty()) throw new NotFoundException("User Not Found");
 		return courseMapper.map(historyService.add(optionalUser.get(), course_id));
 	}
+
+	@Override
+	public UserDetailsResponseModel changePassword(String token, ChangePasswordRequestModel passwords) {
+		Optional<User> optionalUser = authService.authenticate(token);
+		if (optionalUser.isEmpty()) throw new NotFoundException("User Not Found");
+		User res = defaultUserService.changePassword(optionalUser.get(), passwords);
+		return userMapper.map(res);
+	}
+
+
 }
