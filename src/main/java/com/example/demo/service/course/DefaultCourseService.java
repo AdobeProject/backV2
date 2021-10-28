@@ -118,7 +118,7 @@ public class DefaultCourseService implements CourseService {
 	}
 
 	public List<Course> search(String value) {
-		return courseRepository.findAllByNameContaining(value);
+		return courseRepository.findAllByNameContainingIgnoreCase(value);
 	}
 
 	@Override

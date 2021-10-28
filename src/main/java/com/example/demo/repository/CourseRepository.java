@@ -14,6 +14,6 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Long> {
 	List<Course> findAllBySubCategory(SubCategory subCategory);
 	List<Course> findAllBySubCategory_Category(Category category);
-	List<Course> findAllByNameContaining(String value);
+	List<Course> findAllByNameContainingIgnoreCase(String value);
 	List<Course> findAllByCourseOwner(User owner);
 }
