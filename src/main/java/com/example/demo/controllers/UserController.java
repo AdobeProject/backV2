@@ -57,8 +57,9 @@ public class UserController {
 		return courseFacade.getAllUserEnrolledCourses(token);
 	}
 
-	@PutMapping("/")
+	@PostMapping("/update")
 	public UserDetailsResponseModel update(@RequestHeader("Authorization") String token, @RequestBody UpdateRequestModel update) {
+		System.out.println(update.getFirstName());
 		return userApiFacade.update(token, update);
 	}
 
