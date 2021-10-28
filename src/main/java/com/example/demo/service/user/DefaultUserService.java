@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.InvalidArgumentException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.user.ChangePasswordRequestModel;
+import com.example.demo.model.user.UpdateRequestModel;
 import com.example.demo.model.user.UserCreateParams;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.utility.Regex;
@@ -58,7 +59,7 @@ public class DefaultUserService implements UserService {
 	}
 
 	@Override
-	public User update(User user, UserCreateParams update) {
+	public User update(User user, UpdateRequestModel update) {
 		if (update.getFirstName() != null)
 			user.setFirstName(update.getFirstName());
 		if (update.getSecondName() != null)

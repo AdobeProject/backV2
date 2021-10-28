@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface UserApiFacade {
 
     UserAuthenticationResponseModel create(UserCreateRequestModel requestModel);
-    UserDetailsResponseModel update(String token, UserCreateParams newParams);
+    UserDetailsResponseModel update(String token, UpdateRequestModel newParams);
     UserDetailsResponseModel refresh(String token);
     CourseDetailsResponse add(String token, Long course_id);
     UserDetailsResponseModel changePassword(String token, ChangePasswordRequestModel passwords);

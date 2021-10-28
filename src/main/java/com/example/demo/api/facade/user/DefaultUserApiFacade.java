@@ -56,7 +56,7 @@ public class DefaultUserApiFacade implements UserApiFacade {
 	}
 
 	@Override
-	public UserDetailsResponseModel update(String token, UserCreateParams newParams) {
+	public UserDetailsResponseModel update(String token, UpdateRequestModel newParams) {
 		Optional<User> user = authService.authenticate(token);
 		if (user.isEmpty()) throw new NotFoundException("User doesnt exist");
 		User updated = defaultUserService.update(user.get(), newParams);

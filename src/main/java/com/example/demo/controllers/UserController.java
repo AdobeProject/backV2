@@ -58,7 +58,7 @@ public class UserController {
 	}
 
 	@PutMapping("/")
-	public UserDetailsResponseModel update(@RequestHeader("Authorization") String token, @RequestBody UserCreateParams update) {
+	public UserDetailsResponseModel update(@RequestHeader("Authorization") String token, @RequestBody UpdateRequestModel update) {
 		return userApiFacade.update(token, update);
 	}
 
